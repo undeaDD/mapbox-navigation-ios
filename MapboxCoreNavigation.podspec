@@ -41,10 +41,19 @@ Pod::Spec.new do |s|
   s.module_name = "MapboxCoreNavigation"
 
   s.dependency "MapboxNavigationNative", "~> 6.2.1"
-  s.dependency "MapboxAccounts", "~> 2.3.1"
+  s.dependency "MapboxAccounts", "~> 2.2.0"
   s.dependency "MapboxDirections", "~> 0.31.0"
   s.dependency "MapboxMobileEvents", "~> 0.10.2"        # Always pin to a patch release if pre-1.0
   s.dependency "Turf", "~> 0.3.0"                       # Always pin to a patch release if pre-1.0
+
+  s.user_target_xcconfig = {
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => '$(EXCLUDED_ARCHS__EFFECTIVE_PLATFORM_SUFFIX_$(EFFECTIVE_PLATFORM_SUFFIX)__NATIVE_ARCH_64_BIT_$(NATIVE_ARCH_64_BIT)__XCODE_$(XCODE_VERSION_MAJOR))',
+    'EXCLUDED_ARCHS__EFFECTIVE_PLATFORM_SUFFIX_simulator__NATIVE_ARCH_64_BIT_x86_64__XCODE_1200' => 'arm64 arm64e armv7 armv7s armv6 armv8'
+  }
+  s.pod_target_xcconfig = {
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => '$(EXCLUDED_ARCHS__EFFECTIVE_PLATFORM_SUFFIX_$(EFFECTIVE_PLATFORM_SUFFIX)__NATIVE_ARCH_64_BIT_$(NATIVE_ARCH_64_BIT)__XCODE_$(XCODE_VERSION_MAJOR))',
+    'EXCLUDED_ARCHS__EFFECTIVE_PLATFORM_SUFFIX_simulator__NATIVE_ARCH_64_BIT_x86_64__XCODE_1200' => 'arm64 arm64e armv7 armv7s armv6 armv8'
+  }
 
   s.swift_version = "5.0"
 
